@@ -1,5 +1,3 @@
-//gcc 7.4.0
-
 #include  <stdio.h>
 #include  <stdbool.h>
 #include  <stdlib.h>
