@@ -2,6 +2,9 @@
 
 #include  <stdio.h>
 
+// bubble sort is similar to putting pebble in a container of water
+// the heavy/larger element/pebble goes to the bottom(index size-1) of the array after each iteration
+// repeat the process to put the next larger element to the bottom (index size-2) and so on
 int* bubble_sort(int* a, int size)
 {
     if (!a)
