@@ -10,14 +10,22 @@ int* insertion_sort(int* a, int size)
         return NULL;
     
     for (int i = 1; i < size; i++) {
+        // item to compare
         int item = a[i];
+        // initialize insertion index to i
         int insert_index = i;
+        // loop through the left array
         for (int j = i-1; j >= 0; j--) {
+            // check if item is less than the a[j]
+            // if yes, then j is the new insertion index
             if (item < a[j]) {
+                // move the a[j] to insertion_index
                 a[insert_index] = a[j];
+                // update the insertion index to j
                 insert_index = j;
             }
         }
+        // insert the item in to insertion_index
         a[insert_index] = item;
     }
     return a;
