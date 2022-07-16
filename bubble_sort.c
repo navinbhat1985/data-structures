@@ -12,7 +12,9 @@ int* bubble_sort(int* a, int size)
     int tmp = 0;
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size-i-1; j++) {
+            // compare each element with its adjacent
             if (a[j] > a[j+1]) {
+                // swap the elements if a[j] > a[j+1}
                 tmp = a[j]; a[j] = a[j+1]; a[j+1] = tmp;
             }
         }
