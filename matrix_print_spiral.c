@@ -1,29 +1,34 @@
 #include <stdio.h>
 #define M 3
-#define N 3
+#define N 1
 
 void printSpiral(int matrix[][N], int top, int bottom, int left, int right)
 {
-    while (top <= bottom || left <= right) {
+    while (top <= bottom && left <= right) {
         int i = top;
         int j = 0;
-        for (j = left; j < right; j++)
+        for (j = left; j <= right; j++)
             printf("%2d ", matrix[i][j]);
-
+        top++;
+        
         j = right;
-        for (i = top; i < bottom; i++)
+        for (i = top; i <= bottom; i++)
             printf("%2d ", matrix[i][j]);
+        right--;
+
+        if (top <= bottom) {
+            i = bottom;
+            for (j = right; j >= left; j--)
+                printf("%2d ", matrix[i][j]);
+            bottom--;
+        }
         
-        i = bottom;
-        for (j = right; j > left; j--)
-            printf("%2d ", matrix[i][j]);
-        
-        j = left;
-        for (i = bottom; i > top; i--)
-            printf("%2d ", matrix[i][j]);
-        top++; bottom--;left++; right--;
-        if (top == bottom && right == left)
-            printf("%2d ", matrix[top][right]);
+        if (left <= right) {
+            j = left;
+            for (i = bottom; i >= top; i--)
+                printf("%2d ", matrix[i][j]);
+            left++;
+        }
     }
     
 }
@@ -49,13 +54,15 @@ int main()
 		{14, 23, 22, 21, 8},
 		{13, 12, 11, 10, 9}
 	};*/
-
-    int matrix[M][N] =
+    //int matrix[M][N] ={{1}};
+    //int matrix[M][N] ={{1,2,3}};
+    int matrix[M][N] ={{1}, {2}, {3}};
+/*    int matrix[M][N] =
 	{
 		{ 1, 2, 3},
 		{ 4, 5, 6},
 		{ 7, 8, 9},
-    };
+    };*/
 
  /*   int matrix[M][N] =
 	{
@@ -63,8 +70,8 @@ int main()
 		{ 5, 6, 7,  8},
 		{ 9, 10, 11, 12},
     };*/
-	int top = 0, bottom = M - 1;
-	int left = 0, right = N - 1;
+	int top = 0, bottom = M-1 ;
+	int left = 0, right = N-1 ;
 
 	printSpiral(matrix, top, bottom, left, right);
 
