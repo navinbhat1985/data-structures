@@ -1,6 +1,7 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <limits.h>
 
 // Data structure to store a Binary Search Tree node
 typedef struct Node
@@ -14,8 +15,6 @@ Node* newNode(int key)
 {
 	Node* node = calloc(1, sizeof(Node));
 	node->data = key;
-	node->left = node->right = NULL;
-
 	return node;
 }
 
@@ -38,48 +37,43 @@ Node* insert(Node* root, int key)
 
 
 // Function to determine if given Binary Tree is a BST or not
-bool isBST(Node* root)
+bool isBST(Node* root, int min, int max)
 {
     if (root == NULL)
         return true;
-
-    if (root->left && (root->left->data > root->data)) {
-        printf("\n Invalid root->left->data %d  is > root->data %d\n", root->left->data, root->data);
+    printf("root %d min %d max %d\n", root->data, min, max);
+    if (root->data < min || root->data > max) {
         return false;
     }
-
-    if (root->right && (root->right->data < root->data)) {
-        printf("\n Invalid root->right->data %d  is < root->data %d\n", root->right->data, root->data);
-        return false;
-    }
-    
-    bool valid = isBST(root->left);
+    bool valid = isBST(root->left, min, root->data-1);
     if (valid) {
-        valid = isBST(root->right);
+        valid = isBST(root->right, root->data+1, max);
     }
-
     return valid;
 }
 
 int main()
 {
-	/*Node* root = NULL;
+/*	Node* root = NULL;
 	int keys[] = { 15, 10, 20, 8, 12, 16, 25 };
-    int sz = sizeof(keys)/sizeof(keys[0]);
-	for (int i = 0; i < sz; i++)
-		root = insert(root, keys[i]);*/
-    
-    struct Node* root = newNode(20); 
-    root->left = newNode(8); 
-    root->left->left = newNode(14); 
-    root->left->right = newNode(16); 
-    root->left->right->left = newNode(9); 
-    root->left->right->right = newNode(17); 
-    root->right = newNode(22); 
-    root->right->right = newNode(25);
+
+    int n = sizeof(keys)/sizeof(keys[0]);
+	for (int i = 0; i < n; i++)
+		root = insert(root, keys[i]);
+    */
+    Node* root = NULL;
+
+	root = newNode(1);
+	root->left = newNode(2);
+	root->right = newNode(3);
+	root->left->right = newNode(4);
+	root->right->left = newNode(5);
+	root->right->right = newNode(6);
+	root->right->left->left = newNode(7);
+	root->right->left->right = newNode(8);
 
 	// swap nodes
-	printf("Is valid BST is %d\n", isBST(root));
+	printf("\n isBST = %d\n", isBST(root, INT_MIN, INT_MAX));
 
 	return 0;
 }
